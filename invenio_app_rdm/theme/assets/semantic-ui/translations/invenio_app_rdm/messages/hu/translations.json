@@ -259,5 +259,10 @@
     "ORCID profile": "ORCID profil",
     "ROR profile": "ROR profil",
     "GND profile": "GND profil",
-    "<0><0>metadata.publication_date:[2017-01-01 TO *]</0> will give you all the publications from 2017 until today.</0>": ""
+    "<0><0>metadata.publication_date:[2017-01-01 TO *]</0> will give you all the publications from 2017 until today.</0>": "",
+    "Delete section": "Szekció törlése",
+    "Add section": "Szekció hozzáadása",
+    "Multiple value field": "Többértékes mező",
+    "Text field": "Szöveges mező",
+    "Select domain": "Válassz tudományterületet"
 }
