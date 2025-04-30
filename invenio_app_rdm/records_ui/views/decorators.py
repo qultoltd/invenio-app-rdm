@@ -11,7 +11,7 @@
 
 from functools import wraps
 
-from flask import g, make_response, redirect, request, session, url_for
+from flask import current_app, g, make_response, redirect, request, session, url_for, config
 from flask_login import login_required
 from invenio_communities.communities.resources.serializer import (
     UICommunityJSONSerializer,
@@ -354,11 +354,12 @@ def pass_draft_community(f):
     @wraps(f)
     def view(**kwargs):
         comid = request.args.get("community")
-        if comid:
-            community = current_communities.service.read(id_=comid, identity=g.identity)
-            kwargs["community"] = UICommunityJSONSerializer().dump_obj(
-                community.to_dict()
-            )
+        if not comid:
+            comid = current_app.config.get("DEFAULT_COMMUNITY_SLUG")
+        community = current_communities.service.read(id_=comid, identity=g.identity)
+        kwargs["community"] = UICommunityJSONSerializer().dump_obj(
+            community.to_dict()
+        )
 
         return f(**kwargs)
 
