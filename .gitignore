@@ -55,7 +55,7 @@ coverage.xml
 .e2e_screenshots
 
 # Translations
-*.mo
+#*.mo
 
 # Django stuff:
 *.log
