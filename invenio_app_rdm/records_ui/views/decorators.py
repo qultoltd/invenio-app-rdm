@@ -11,7 +11,7 @@
 
 from functools import wraps
 
-from flask import current_app, g, make_response, redirect, request, session, url_for, config
+from flask import current_app, g, make_response, redirect, request, session, url_for
 from flask_login import login_required
 from invenio_communities.communities.resources.serializer import (
     UICommunityJSONSerializer,
