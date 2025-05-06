@@ -284,5 +284,6 @@
     "Multiple value field": "Többértékes mező",
     "Text field": "Szöveges mező",
     "Select domain": "Válassz tudományterületet",
-    "<0><0>metadata.publication_date:[2017-01-01 TO *]</0> will give you all the publications from 2017 until today.</0>": "<0><0>metadata.publication_date:[2017-01-01 TO *]</0> lekérdezéssel 2017. január 1-jétől kezdődően a mai napig bezárólag minden publikáció listázásra kerül.</0>"
+    "<0><0>metadata.publication_date:[2017-01-01 TO *]</0> will give you all the publications from 2017 until today.</0>": "<0><0>metadata.publication_date:[2017-01-01 TO *]</0> lekérdezéssel 2017. január 1-jétől kezdődően a mai napig bezárólag minden publikáció listázásra kerül.</0>",
+    "Completion guide": "Kitöltési útmutató"
 }
