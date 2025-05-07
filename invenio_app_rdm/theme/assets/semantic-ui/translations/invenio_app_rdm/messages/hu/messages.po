@@ -950,21 +950,3 @@ msgstr ""
 "<0><0>metadata.publication_date:[2017-01-01 TO *]</0> lekérdezéssel 2017. "
 "január 1-jétől kezdődően a mai napig bezárólag minden publikáció listázásra "
 "kerül.</0>"
-
-msgid "Delete section"
-msgstr "Szekció törlése"
-
-msgid "Add section"
-msgstr "Szekció hozzáadása"
-
-msgid "Multiple value field"
-msgstr "Többértékes mező"
-
-msgid "Text field"
-msgstr "Szöveges mező"
-
-msgid "Select domain"
-msgstr "Válassz tudományterületet"
-
-msgid "Completion guide"
-msgstr "Kitöltési útmutató"
