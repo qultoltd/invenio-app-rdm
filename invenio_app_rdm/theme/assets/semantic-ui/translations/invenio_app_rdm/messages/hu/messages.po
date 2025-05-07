@@ -965,3 +965,6 @@ msgstr "Szöveges mező"
 
 msgid "Select domain"
 msgstr "Válassz tudományterületet"
+
+msgid "Completion guide"
+msgstr "Kitöltési útmutató"
