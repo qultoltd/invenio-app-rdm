@@ -1,0 +1,256 @@
+{#
+    Copyright (C) 2021 CERN.
+    Copyright (C) 2021 Northwestern University.
+  
+    Invenio App RDM is free software; you can redistribute it and/or modify it
+    under the terms of the MIT License; see LICENSE file for more details.
+  #}
+  {%- set title = _("Search guide") %}
+  {%- extends config.BASE_TEMPLATE %}
+  
+  {%- block page_body %}
+  <div class="ui container mt-25">
+    <h1>Keresési útmutató</h1>
+    <p>
+      Ez az útmutató bemutatja, hogyan írjunk összetett kereséseket egyszerű, könnyen érthető példákon keresztül.
+    </p>
+    <h3>Egyszerű keresés (egy vagy több kifejezés)</h3>
+    <p>
+      <strong>Példa:</strong>
+      <a href="/search?page=1&amp;size=20&amp;q=open%20science"
+        ><code>open science</code></a
+      >
+    </p>
+    <p>
+      Az eredmény olyan rekordokat fog tartalmazni, amelyekben szerepel
+      az <code>open</code>
+      <em>vagy</em> <code>science</code> <em>kifejezések</em> <em>bármelyik mezőben</em>. A keresés szótövesítést alkalmaz, tehát pl. a
+      <code>science</code> is találat lesz a 
+      <code>sciences</code> kifejezésre. A keresési eredmények rangsorolása egy olyan algoritmus alapján történik, amely figyelembe veszi a keresési kifejezéseket.
+    </p>
+    <p>
+      Mindkét kifejezés <em>jelenlétét</em> megkövetelhetjük a
+      <code>+</code> vagy <code>AND</code> operátorokkal:
+    </p>
+    <p>
+      <strong>Példák:</strong>
+      <a href="/search?page=1&amp;size=20&amp;q=%2Bopen%20%2Bscience"
+        ><code>+open +science</code></a
+      >
+      or
+      <a href="/search?page=1&amp;size=20&amp;q=open%20AND%20science"
+        ><code>open AND science</code></a
+      >
+    </p>
+    <p>
+      Megkövetelhetjük egy vagy több kifejezés <em>hiányát</em> a
+      <code>-</code> vagy <code>NOT</code> operátorokkal:
+    </p>
+    <p>
+      <strong>Példák:</strong>
+      <a href="/search?page=1&amp;size=20&amp;q=-open%20%2Bscience"
+        ><code>-open +science</code></a
+      >
+      or
+      <a href="/search?page=1&amp;size=20&amp;q=NOT%20open%20AND%20science"
+        ><code>NOT open AND science</code></a
+      >
+    </p>
+    <h3>Kifejezés keresése</h3>
+    <p>
+      <strong>Példa:</strong>
+      <a href="/search?page=1&amp;size=20&amp;q=%22open%20science%22"
+        ><code>"open science"</code></a
+      >
+    </p>
+    <p>
+      Az eredménylista olyan rekordokból fog állni, amelyek tartalmazzák a <code>open science</code> <em>kifejezést</em>
+       <em>bármelyik mezőben</em>.
+    </p>
+    <h3>Mező keresés</h3>
+    <p>
+      <strong>Példa:</strong>
+      <a href="/search?page=1&amp;size=20&amp;q=metadata.title:open"
+        ><code>metadata.title:open</code></a
+      >
+    </p>
+    <p>
+      Az eredménylista olyan rekordokból fog állni, amelyek tartalmazzák az <code>open</code> <em>kifejezést</em> a
+      <code>metadata.title</code> <em>mezőben</em>. Ha több kifejezésre szeretnénk keresni a címben, akkor idézőjellel <strong>csoportosítani kell a kifejezéseket</strong>:
+    </p>
+    <p>
+      <strong>Példa:</strong>
+      <a href="/search?page=1&amp;size=20&amp;q=metadata.title:(open%20science%29"
+        ><code>metadata.title:(open science)</code></a
+      >
+    </p>
+    <p>
+      Keresd fel az <a href="https://inveniordm.docs.cern.ch/reference/metadata/#metadata"
+        > InvenioRDM dokumentációt </a
+      > a kereshető mezők teljes listájáért.
+    </p>
+    <h3>Egyszerű, kifejezés vagy mező keresés kombinálása</h3>
+    <p>
+      <strong>Példa:</strong>
+      <a
+        href="/search?page=1&amp;size=20&amp;q=%2Bmetadata.title:%22open%20science%22%20-metadata.title:policy"
+        ><code>+metadata.title:"open science" -metadata.title:policy</code></a
+      >
+      vagy pl:
+      <a href="/search?page=1&amp;size=20&amp;q=metadata.title:(-open%20%2Bscience%29"
+        ><code>metadata.title:(-open +science)</code></a
+      >
+    </p>
+    <p>
+      Összetett kereséshez kombinálható az egyszerű, kifejezés és mező keresés.
+    </p>
+    <h3>Intervallum keresés</h3>
+    <p>
+      <strong>Példa:</strong>
+      <a
+        href="/search?page=1&amp;size=20&amp;q=metadata.publication_date:%5B2017%20TO%202018%5D"
+        ><code>metadata.publication_date:[2017 TO 2018]</code></a
+      >
+      (Figyelem! Csupa nagybetűvel írando: <code>TO</code>).
+    </p>
+    <p>
+      Az eredménylista olyan rekordokból fog állni, amelyek publikációs dátuma 2017-01-01 és
+      2018-01-01 (mindkét dátum zárt).
+    </p>
+    <p>A részleges dátumok kiegészítésre kerülnek teljes dátumokká, pl:</p>
+    <ul>
+      <li>2017 kiegészítve: 2017-01-01</li>
+      <li>2017-06 kiegészítve: 2017-06-01</li>
+    </ul>
+    <p>
+      Használj szögletes zárójelet (<code>[]</code>) <em>zárt</em> intervallumokhoz és
+      kapcsos zárójelet (<code>{}</code>) <em>nyitott</em> intervallumokhoz, pl:
+    </p>
+    <ul>
+      <li>
+        <code>[2017 TO 2018}</code> intervallum megegyezik a
+        <code>[2017-01-01 TO 2017-12-31]</code> intervallummal a dátum kiegészítés és a zárt alsó és nyitott felső határ miatt.
+      </li>
+    </ul>
+    <p>Példa további intervallumokra:</p>
+    <ul>
+      <li>
+        <code>metadata.publication_date:{* TO 2017-01-01}</code>: Minden nap 2017-ig.
+      </li>
+      <li>
+        <code>metadata.publication_date:[2017-01-01 TO *]</code>: Minden nap 2017-től.
+      </li>
+    </ul>
+    <h3>Rangsorolás/Rendezés</h3>
+    <p>
+      Alapértelmezetten minden keresést egy belső rangsorolási algoritmus rendez,
+      amely minden egyes találatot értékel a lekérdezés alapján. Mind a felhasználói
+      felületen, mind a REST API-ban lehetőség van a találatok rendezésére a következő
+      szempontok szerint:
+    </p>
+    <ul>
+      <li>Legújabb</li>
+      <li>Legjobb egyezés</li>
+      <li>Legrégebbi</li>
+      <li>Legnézettebb</li>
+      <li>Legtöbbet letöltött</li>
+    </ul>
+    <h3>Reguláris kifejezések</h3>
+    <p>
+      A reguláris kifejezések lehetővé
+      teszik adott minta szerinti keresést egy mezőben. Például, ha olyan rekordokat keresünk, 
+      amelynek DOI előtagja 10.5281, akkor használhatjuk a reguláris kifejezés alapú keresést:
+    </p>
+    <p>
+      <strong>Példa:</strong>
+      <a href="/search?page=1&amp;size=20&amp;q=metadata.subjects.identifier:%2F03yrm5c2%5B1%2C6%5D%2F"
+        ><code>metadata.subjects.identifier:/03yrm5c2[1,6]/</code></a
+      >
+    </p>
+    <p>
+      A reguláris kifejezésnek illeszkednie kell a mező <em>teljes</em> értékére.
+      Keresd fel a
+      <a
+        href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html#regexp-syntax"
+        >reguláris kifejezés szintaxisát</a
+      >
+      további részletekért.
+    </p>
+    <h3>Hiányzó értékek</h3>
+    <p>
+      Lehetőség van olyan rekordok keresésére, amelyekből hiányzik egy érték,
+      vagy amelyek egy specifikus mezőben értéket tartalmaznak az <code>_exists_</code> és
+      <code> not _exists_</code> mezőnevek használatával.
+    </p>
+    <p>
+      <strong>Példa:</strong>
+      <a href="/search?page=1&amp;size=20&amp;q=_missing_:metadata.additional_titles"
+        ><code>not _exists_:metadata.additional_titles</code></a
+      >
+      (minden olyan rekord, amelyben nincs metadata.additional_titles)
+    </p>
+    <p>
+      <strong>Példa:</strong>
+      <a href="/search?page=1&amp;size=20&amp;q=_exists_:metadata.creators"
+        ><code>_exists_:metadata.creators</code></a
+      >
+      (minden olyan rekord, amelyben van metadata.creators)
+    </p>
+    <h3>További lehetőségek</h3>
+    <h4>Boosting</h4>
+    <p>
+      A boost operátorral <code>^</code> meg lehet adni, ha az egyik kifejezés relevánsabb, mint a másik. 
+      Például keressük azokat a rekordokat, amelyek tartalmazzák az
+      <em>open science</em> kifejezést vagy a <em>title</em> vagy
+      <em>description</em> mezőben, de rangsoroljuk előrébb azokat, amelyek a 
+      <em>title</em> mezőben tartalmazzák a keresett kifejezést:
+    </p>
+    <p>
+      <strong>Példa:</strong>
+      <a
+        href="/search?page=1&amp;size=20&amp;q=metadata.title:%22open%20science%22%5E5%20metadata.description:%22open%20science%22"
+        ><code>metadata.title:"open science"^5 metadata.description:"open science"</code></a
+      >
+    </p>
+    <h4>Fuzziness</h4>
+    <p>
+      A fuzzy operátorral <code>~</code> olyan kifejezésekre kereshetünk, ami hasonló, de nem teljesen ugyanaz, mint a megadott kifejezés.
+    </p>
+    <p>
+      <strong>Példa:</strong>
+      <a href="/search?page=1&amp;size=20&amp;q=oepn~"><code>oepn~</code></a>
+    </p>
+    <p>
+      Az eredménylista olyan rekordokból fog állni, amelyek értékei között szerepel hasonló, mint az <code>oepn</code> például <code>open</code>.
+    </p>
+    <h4>Proximity keresés</h4>
+    <p>
+      A kifejezés keresés alapértelmezetten a szavak sorrendjét figyelembe veszi, ezlrt pl a <code>"open science"</code> 
+      keresőkifejezés esetén a <em>"open access and science"</em> nem fog szerepelni a találati listában. A proximity keresés lehetővé teszi, hogy találatot kapjunk
+      akkor is, ha a szavak más sorrendben szerepelnek, vagy más szavak is szerepelnek a kifejezésben a megadottakon kívül.
+      A rugalmasság mértéke megadható egy számmal a kereső kifejezés után:
+    </p>
+    <p>
+      <strong>Példa:</strong>
+      <a href="/search?page=1&amp;size=20&amp;q=%22open%20science%22~5"
+        ><code>"open science"~5</code></a
+      >
+    </p>
+    <h4>Wildcard</h4>
+    <p>
+      Wildcard karaktert használhatunk egy karakter
+      <code>?</code> operátor) vagy nulla vagy több karakter helyettesítésére.
+      <code>*</code> operátor).
+    </p>
+    <p>
+      <strong>Példa:</strong>
+      <a href="/search?page=1&amp;size=20&amp;q=ope%3F%20scien*"
+        ><code>ope? scien*</code></a
+      >
+    </p>
+    <p>
+      A wildcard keresések lassúak és ha lehetséges, akkor kerülendők.
+    </p>
+  </div>
+  {%- endblock page_body%}
+  
