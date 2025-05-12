@@ -354,12 +354,17 @@ def pass_draft_community(f):
     @wraps(f)
     def view(**kwargs):
         comid = request.args.get("community")
-        if not comid:
-            comid = current_app.config.get("DEFAULT_COMMUNITY_SLUG")
-        if comid:
+        community = None
+
+        try:
+            comid = comid or current_app.config.get("DEFAULT_COMMUNITY_SLUG")
             community = current_communities.service.read(id_=comid, identity=g.identity)
+        except PIDDoesNotExistError:
+            current_app.logger.error("comid '%s' is not a valid community id", comid)
+
+        if community:
             kwargs["community"] = UICommunityJSONSerializer().dump_obj(
-                community.to_dict()
+                    community.to_dict()
             )
 
         return f(**kwargs)
