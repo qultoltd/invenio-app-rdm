@@ -9,3 +9,6 @@ msgstr "Válassz tudományterületet"
 
 msgid "Completion guide"
 msgstr "Kitöltési útmutató"
+
+msgid "Add new"
+msgstr "Új hozzáadása"
