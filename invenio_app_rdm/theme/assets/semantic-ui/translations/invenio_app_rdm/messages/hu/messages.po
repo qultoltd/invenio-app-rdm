@@ -894,7 +894,7 @@ msgid "open"
 msgstr "megnyit"
 
 msgid "Open"
-msgstr "Megnyitás"
+msgstr "Nyílt"
 
 msgid "unlock"
 msgstr "felold"

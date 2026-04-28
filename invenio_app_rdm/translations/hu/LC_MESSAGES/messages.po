@@ -389,7 +389,7 @@ msgstr "ID"
 
 #: invenio_app_rdm/administration/user_moderation/user_moderation.py:173
 msgid "Open"
-msgstr "Megnyitás"
+msgstr "Nyílt"
 
 #: invenio_app_rdm/administration/users/users.py:22
 #: invenio_app_rdm/administration/users/users.py:32
